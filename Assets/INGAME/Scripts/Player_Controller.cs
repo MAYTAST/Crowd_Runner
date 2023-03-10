@@ -10,12 +10,8 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] float _slideSpeed;
     private Vector3 clickedScreenPosition;
     private Vector3 clickedPlayerPosition;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log(Screen.width);
-    }
-    // Update is called once per frame
+
+
     void Update()
     {
         Moveforward();
