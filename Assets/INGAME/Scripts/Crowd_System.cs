@@ -34,4 +34,8 @@ public class Crowd_System : MonoBehaviour
         float z = _radius * Mathf.Sqrt(index) * Mathf.Sin(Mathf.Deg2Rad * index * _angle);
         return new Vector3(x, 0, z);
     }
+    public float GetCrowdRadius()
+    {
+        return _radius * Mathf.Sqrt(_runnerParents.childCount);
+    }
 }

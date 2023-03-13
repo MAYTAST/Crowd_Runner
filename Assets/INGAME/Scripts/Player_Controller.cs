@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
+    [Header("Elements")]
+    [SerializeField] private Crowd_System _crowd_System;
+    [SerializeField] private float _roadWidth;
     [Header("Settings")]
     [SerializeField] float _playerSpeed;
     [Header("Control")]
@@ -36,6 +39,7 @@ public class Player_Controller : MonoBehaviour
 
             Vector3 position = transform.position;
             position.x = clickedPlayerPosition.x + xScreenDifference;
+            position.x = Mathf.Clamp(position.x, -_roadWidth / 2+_crowd_System.GetCrowdRadius(), _roadWidth / 2- _crowd_System.GetCrowdRadius());
             transform.position = position;
           //  transform.position = clickedPlayerPosition + Vector3.right * xScreenDifference;
         }
