@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    public static ChunkManager _instance;
     [Header("Elemets")]
     [SerializeField] private Chunk[] _chunkPrefabOrdered;
     [SerializeField] private Chunk[] _chunkPrefabRandom;
     [SerializeField] Chunk StartChunk;
+    private GameObject finishLine;
+    private void Awake()
+    {
+        if (_instance!=null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
     void Start()
     {
         GenrateOrderedLevel();
+        finishLine = GameObject.FindWithTag("Finish");
     }
     void GenrateOrderedLevel()
     {
@@ -39,5 +53,9 @@ public class ChunkManager : MonoBehaviour
             Chunk ChunkInstance = Instantiate(chunkToCreate, chunkPos, Quaternion.identity, transform);
             chunkPos.z += chunkToCreate.GetChunkLength() / 2;
         }
+    }
+    public float GetFinishLineZpos()
+    {
+        return finishLine.transform.position.z;
     }
 }

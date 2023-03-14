@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
+    public static Player_Controller _instance;
     [Header("Elements")]
     [SerializeField] private Crowd_System _crowd_System;
+    [SerializeField] private PlayerAnimator playerAnimator;
     [SerializeField] private float _roadWidth;
     [SerializeField] bool CanMove;
     [Header("Settings")]
@@ -15,9 +17,26 @@ public class Player_Controller : MonoBehaviour
     private Vector3 clickedScreenPosition;
     private Vector3 clickedPlayerPosition;
 
+
+
+    private void Awake()
+    {
+        if(_instance!=null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
     private void Start()
     {
         GameManager.onStateChanged+= ChangedGameState;
+    }
+    private void OnDestroy()
+    {
+        GameManager.onStateChanged -= ChangedGameState;
     }
 
     void Update()
@@ -38,10 +57,12 @@ public class Player_Controller : MonoBehaviour
     private void StartPlaying()
     {
         CanMove = true;
+        playerAnimator.Run();
     }
     private void StopMoving()
     {
         CanMove = false;
+        playerAnimator.Idle();
     }
     private void Moveforward()
     {

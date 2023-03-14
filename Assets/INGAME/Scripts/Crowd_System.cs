@@ -6,6 +6,7 @@ public class Crowd_System : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform _runnerParent;
+    [SerializeField] PlayerAnimator _playerAnimator;
     [Header("Elements")]
     [SerializeField] GameObject _runnerPrefab;
     [Header("Settings")]
@@ -68,7 +69,7 @@ public class Crowd_System : MonoBehaviour
         {
             Instantiate(_runnerPrefab, _runnerParent);
         }
-       
+        _playerAnimator.Run();
     }
     void RemoveBonus(int BonusAmount)
     {
